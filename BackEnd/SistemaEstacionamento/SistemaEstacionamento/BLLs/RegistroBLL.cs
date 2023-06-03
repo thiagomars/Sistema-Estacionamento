@@ -55,14 +55,10 @@ namespace SistemaEstacionamento.BLLs
             var listaVeiculos = await _context.Registro.Where(item => item.Finalizado == false).ToListAsync();
 
             if(cor != null) 
-            {
                 listaVeiculos = listaVeiculos.Where(itens => itens.Cor == cor && itens.Finalizado == false).ToList();
-            }
 
             if (placa != null)
-            {
                 listaVeiculos = listaVeiculos.Where(itens => itens.Placa.Contains(placa) && itens.Finalizado == false).ToList();
-            }
 
             return listaVeiculos;
         }
@@ -136,6 +132,28 @@ namespace SistemaEstacionamento.BLLs
 
             _context.Registro.Update(registro);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<ListagemRegistroDTO>> ListarTodosRegistros()
+        {
+            var todosRegistros = await _context.Registro
+                .Select(item => new ListagemRegistroDTO
+                {
+                    Id = item.Id,
+                    Entrada = item.Entrada.ToString("dd/MM/yyyy hh:mm"),
+                    Saida = item.Saida.HasValue
+                        ? item.Saida.Value.ToString("dd/MM/yyyy hh:mm")
+                        : "Não deu saída",
+                    PlacaCor = "Cor: " + item.Cor.GetDisplayName() + " Placa: " + item.Placa,
+                    TipoNumeroDocumento = item.TipoDocumento + " - " + item.Documento,
+                    Finalizado = item.Finalizado
+                })
+                .ToListAsync();
+
+            if (todosRegistros == null)
+                throw new Exception("Nenhum registro encontrado");
+
+            return todosRegistros;
         }
 
     }

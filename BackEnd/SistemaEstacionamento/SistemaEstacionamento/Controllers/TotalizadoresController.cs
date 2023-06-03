@@ -27,7 +27,7 @@ namespace SistemaEstacionamento.Controllers
         }
 
         [HttpGet("GraficoLinha")]
-        public async Task<List<GraficoLinhaDTO>> GetGraficoLinha()
+        public async Task<List<HomeGraficoLinhaDTO>> GetGraficoLinha()
         {
             var dados = await _totalizadoresBLL.GraficoLinha();
 
@@ -35,16 +35,39 @@ namespace SistemaEstacionamento.Controllers
         }
 
         [HttpGet("GraficoPizza")]
-        public async Task<List<GraficoPizzaDTO>> GetGraficoPizza()
+        public async Task<List<HomeGraficoPizzaDTO>> GetGraficoPizza()
         {
             var dados = await _totalizadoresBLL.GraficoPizza();
 
             return dados;
         }
 
+        [HttpGet("FinanceiroBarras")]
+        public async Task<List<FinanceiroGraficoBarrasDTO>> GetFinanceiroBarras([FromQuery] DateTime inicial, [FromQuery] DateTime final)
+        {
+            var dados = await _totalizadoresBLL.GraficoBarrasFinanceiro(inicial, final);
+
+            return dados;
+        }
+
+        [HttpGet("FinanceiroTotalizadores")]
+        public async Task<List<TotalizadorGenericoDTO>> GetFinanceiroTotalizadores()
+        {
+            List<TotalizadorGenericoDTO> lista = new List<TotalizadorGenericoDTO>();
+
+            var totalizadorSemanal = await _totalizadoresBLL.TotalSemanaFinanceiro();
+            var totalizadorDiario = await _totalizadoresBLL.TotalDiaFinanceiro();
+            var totalizadorMensal = await _totalizadoresBLL.TotalMesFinanceiro();
+
+            lista.Add(totalizadorMensal);
+            lista.Add(totalizadorSemanal);
+            lista.Add(totalizadorDiario);
+
+            return lista;
+
+        }
 
 
-        
 
 
     }

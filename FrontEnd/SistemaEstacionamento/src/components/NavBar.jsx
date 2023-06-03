@@ -1,56 +1,73 @@
-import { FaParking } from "react-icons/fa"
+import 'flowbite';
+
 import { BiHome } from "react-icons/bi"
 import { BsPeople } from "react-icons/bs";
 import { GiTyre } from "react-icons/gi";
-import { RiRoadMapLine } from "react-icons/ri";
+import { MdOutlineMonetizationOn } from "react-icons/md";
+import { RiRoadMapLine, RiArrowDropDownLine } from "react-icons/ri";
+import { HiOutlineLogout } from 'react-icons/hi';
+import { MdOutlineSettings } from 'react-icons/md';
 
-import Submenu from "./Submenu";
+function NavBar(props) {
 
-function NavBar(props){
-
-    return(
-        <div className="">
-            <div className="flex flex-col items-center w-full sm:mt-5">
-                <FaParking className="text-3xl mt-4"/>
-                <p className="text-sm font-semibold"><span className="hidden sm:block">PARKING</span></p>
-            </div>
-
-            <div className="mt-10 w-max font-medium">
-                <a href="/" className='list-none flex flex-row items-center hover:bg-slate-100 cursor-pointer py-2 px-2 rounded-md group'>
-                    <BiHome className='text-xl'/>
-                    <p className="hidden text-base sm:block pl-2 sm:pr-7 font-semibold">Início</p>
+    return (
+        <ul class="space-y-2 mt-3">
+            <li>
+                <a href="/" className='flex items-center w-full p-2 text-base rounded-lg group hover:bg-gray-100'>
+                    <BiHome className='text-xl' />
+                    <p className="flex-1 ml-3 text-left whitespace-nowrap">Início</p>
                 </a>
+            </li>
+            <li>
+                <a href="/ListagemCliente" className='flex items-center w-full p-2 text-base rounded-lg group hover:bg-gray-100'>
+                    <BsPeople className='text-xl' />
+                    <p className="flex-1 ml-3 text-left whitespace-nowrap">Clientes</p>
+                </a>
+            </li>
+            <li>
+                <a href="/ListagemVeiculos" className='flex items-center w-full p-2 text-base rounded-lg group hover:bg-gray-100 '>
+                    <GiTyre className='text-xl' />
+                    <p className="flex-1 ml-3 text-left whitespace-nowrap">Veículos</p>
+                </a>
+            </li>
+            <li>
+                <a href="/ListagemEnderecos" className='flex items-center w-full p-2 text-base rounded-lg group hover:bg-gray-100 '>
+                    <RiRoadMapLine className='text-xl' />
+                    <p className="flex-1 ml-3 text-left whitespace-nowrap">Endereços</p>
+                </a>
+            </li>
+            <li>
+                <button type="button" class="flex items-center w-full p-2 text-base rounded-lg group hover:bg-gray-100 " aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                    <MdOutlineMonetizationOn className="text-xl" />
+                    <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Financeiro</span>
+                    <RiArrowDropDownLine className='text-2xl' />
+                </button>
 
-                <details>
-                    <summary className='list-none flex flex-row items-center hover:bg-slate-100 cursor-pointer py-2 px-2 rounded-md w-full'>
-                        <BsPeople className="text-xl"/>
-                        <p className='hidden sm:block pl-2 text-base font-semibold'>Clientes</p>
-                    </summary>
-                        <Submenu icon='BsPersonPlus' titulo='Cadastrar' link='CadastrarCliente'/>
-                        <Submenu icon='BiSearchAlt' titulo='Buscar' link='/ListagemCliente'/>
-                </details>
-
-                <details>
-                    <summary className='list-none flex flex-row items-center hover:bg-slate-100 cursor-pointer py-2 px-2 rounded-md w-full'>
-                        <GiTyre className="text-xl"/>
-                        <p className='hidden sm:block pl-2 text-base font-semibold'>Veículos</p>
-                    </summary>
-                        <Submenu icon='AiOutlinePlusCircle' titulo='Cadastrar' link='CadastrarVeiculo'/>
-                        <Submenu icon='BiSearchAlt' titulo='Buscar' link='/ListagemVeiculos'/>
-                </details>
-                
-                <details>
-                    <summary className='list-none flex flex-row items-center hover:bg-slate-100 cursor-pointer py-2 px-2 rounded-md w-full'>
-                        <RiRoadMapLine className="text-xl"/>
-                        <p className='hidden sm:block pl-2 text-base font-semibold'>Endereço</p>
-                    </summary>
-                        <Submenu icon='MdOutlineAddRoad' titulo='Cadastrar' link='CadastrarEnderecos'/>
-                        <Submenu icon='BiSearchAlt' titulo='Buscar' link='/ListagemEnderecos'/>
-                </details>
-               
-            </div>
-            
-        </div>
+                <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                    <li>
+                        <a href="/ListagemRegistros" class="flex items-center w-full p-2 text-base rounded-lg pl-11 group hover:bg-gray-100 ">Registros</a>
+                    </li>
+                    <li>
+                        <a href="/DashboardFinanceiro" class="flex items-center w-full p-2 text-base rounded-lg pl-11 group hover:bg-gray-100 ">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="/RelatoriosFinanceiro" class="flex items-center w-full p-2 text-base rounded-lg pl-11 group hover:bg-gray-100 ">Financeiro</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/ListagemEnderecos" className='flex items-center w-full p-2 text-base rounded-lg group hover:bg-gray-100 '>
+                    <MdOutlineSettings className='text-xl' />
+                    <p className="flex-1 ml-3 text-left whitespace-nowrap">Configurações</p>
+                </a>
+            </li>
+            <li>
+                <a href="/ListagemEnderecos" className='flex items-center w-full p-2 text-base rounded-lg group hover:bg-red-500 hover:text-white'>
+                    <HiOutlineLogout className='text-xl' />
+                    <p className="flex-1 ml-3 text-left whitespace-nowrap">Sair</p>
+                </a>
+            </li>
+        </ul>
     )
 }
 

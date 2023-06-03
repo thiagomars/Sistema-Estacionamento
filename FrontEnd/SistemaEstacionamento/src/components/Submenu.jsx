@@ -1,7 +1,8 @@
-import { BsPersonPlus } from "react-icons/bs";
+import { BsPersonPlus, BsListNested } from "react-icons/bs";
 import { BiSearchAlt } from "react-icons/bi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { MdOutlineAddRoad } from "react-icons/md";
+import { MdOutlineAddRoad, MdOutlineFormatListNumbered } from "react-icons/md";
+import { RxDashboard } from "react-icons/rx";
 
 function Submenu(props){
 
@@ -14,6 +15,12 @@ function Submenu(props){
             return <AiOutlinePlusCircle className="text-xl"/>
         if(item == 'MdOutlineAddRoad')
             return <MdOutlineAddRoad className="text-xl"/>
+        if(item == 'RxDashboard')
+            return <RxDashboard className="text-xl"/>
+        if(item == 'BsListNested')
+            return <BsListNested className="text-xl"/>
+        if(item == 'MdOutlineFormatListNumbered')
+            return <MdOutlineFormatListNumbered className="text-xl"/>
     }
 
     return(

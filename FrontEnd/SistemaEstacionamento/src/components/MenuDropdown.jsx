@@ -2,8 +2,23 @@ import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { FaEllipsisV } from 'react-icons/fa';
 import { RiDeleteBinLine, RiEditFill } from 'react-icons/ri';
+import axios from 'axios';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css'; 
 
 function MenuDropdown(props) {
+
+    const deletarItem = () => {
+        axios.delete('https://localhost:7270/api/' + props.tabela + '/' + props.cpf)
+        .then((response) => {
+            toast.success(props.tabela + " deletado com sucesso!");
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
+
     return (
         <Menu>
             <Menu.Button>
@@ -37,13 +52,13 @@ function MenuDropdown(props) {
                             aria-hidden="true"
                         />
                         )}
-                        Editar
+                        Editar {props.id}
                     </button>
                     )}
                 </Menu.Item>
                 <Menu.Item>
                     {({ active }) => (
-                    <button className={`${ active ? 'bg-red-500 text-white' : 'text-gray-600' } group flex w-full items-center rounded-md px-2 py-2 text-sm`} >
+                    <button onClick={deletarItem} className={`${ active ? 'bg-red-500 text-white' : 'text-gray-600' } group flex w-full items-center rounded-md px-2 py-2 text-sm`} >
                         {active ? (
                         <RiDeleteBinLine
                             className="mr-2 h-5 w-5"

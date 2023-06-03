@@ -6,6 +6,9 @@ import { BsPrinterFill } from 'react-icons/bs';
 
 function PagImpressao(props){
 
+    const finalizado = <p className="w-min px-2 rounded-full">FINALIZADO</p>
+    const estacionado = <p className="w-min px-2 rounded-full">ESTACIONADO</p>
+
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
@@ -57,7 +60,7 @@ function PagImpressao(props){
                                 return <tr className='border-b hover:bg-gray-50'>
                                     {
                                         Object.values(value).map((itens) => {
-                                            return <th scope="row" className="font-normal px-6 py-2 border">{typeof itens === 'object' && itens != null ? formatarEndereco(itens) : itens}</th>
+                                            return <th scope="row" className="font-normal border px-6 py-2">{typeof itens === 'object' && itens != null ? formatarEndereco(itens) : (typeof itens === "boolean" ? (itens == true ? finalizado : estacionado) : itens)}</th>
                                         })
                                     }
                                 </tr>

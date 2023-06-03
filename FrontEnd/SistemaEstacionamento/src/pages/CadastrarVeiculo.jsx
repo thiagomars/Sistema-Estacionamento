@@ -1,12 +1,14 @@
 import axios from 'axios';
 import { useState } from 'react';
 
+import { RiArrowDropRightLine } from 'react-icons/ri';
+
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
 
 import InputMask from 'react-input-mask';
 
-function CadastrarVeiculo() {
+function CadastrarVeiculo(props) {
 
     const [tipoVeiculo, setTipoVeiculo] = useState();
     const [placa, setPlaca] = useState();
@@ -42,6 +44,18 @@ function CadastrarVeiculo() {
 
     return (
         <div class="mt-10 sm:mt-0">
+            <div className='flex flex-row items-baseline px-1 pt-2 pb-4'>
+                <h1 className='font-semibold text-2xl'>{props.titulo}</h1>
+                <div className='flex flex-row px-2 items-center'>
+                    <p className='italic text-sm'>{props.subtitulo}</p>
+                    {props.subsubtitulo != null
+                    ? <><RiArrowDropRightLine className='text-lg'/> <p className='italic'>{props.subsubtitulo}</p></>
+                    : null
+                    }
+                    
+                </div>
+            </div>
+            
             <div class="md:grid md:grid-cols-1 md:gap-6">
                 <div class="mt-5 md:col-span-2 md:mt-0">
                     <form action="#" onSubmit={handleSubmit} method="POST">

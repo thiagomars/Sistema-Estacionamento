@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SistemaEstacionamento.BLLs;
 using SistemaEstacionamento.Context;
 using SistemaEstacionamento.DTOs;
@@ -55,6 +56,20 @@ namespace SistemaEstacionamento.Controllers
             var listagem = await _clienteBLL.ListarClientes(nome, cpf, estado);
 
             return listagem;
+        }
+
+        [HttpDelete("{cpf}")]
+        public async Task<IActionResult> Delete(long cpf)
+        {
+            var clienteBuscado = await _context.Cliente.Where(cliente => cliente.Cpf == cpf).FirstOrDefaultAsync();
+
+            if (clienteBuscado == null)
+                return NotFound();
+
+            _context.Cliente.Remove(clienteBuscado);
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

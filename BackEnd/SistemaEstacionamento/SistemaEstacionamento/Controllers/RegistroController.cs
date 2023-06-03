@@ -70,6 +70,20 @@ namespace SistemaEstacionamento.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("Listagem")]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                var lista = await _registroBLL.ListarTodosRegistros();
+                
+                return Ok(lista);
+            } catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         
         
 

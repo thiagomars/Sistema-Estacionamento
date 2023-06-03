@@ -2,25 +2,16 @@ import React, { useEffect, useState } from "react";
 import Chart from "chart.js";
 import axios from 'axios';
 
-function GraficoPizza() {
-
-  const [dados, setDados] = useState([]);
-
-  const dadosGrafico = () => {
-    axios.get('https://localhost:7270/api/Totalizadores/GraficoPizza')
-      .then((response) => {
-        setDados(response.data);
-      })
-  }
+function GraficoPizza(props) {
 
   const gerarGrafico = () => {
     var config = {
       type: "doughnut",
       data: {
-        labels: dados.map(value => value.tipoVeiculo),
+        labels: props.dados.map(value => value.tipoVeiculo),
         datasets: [{
           label: 'My First Dataset',
-          data: dados.map(value => value.quantidade),
+          data: props.dados.map(value => value.quantidade),
           backgroundColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(255, 159, 64, 1)',
@@ -34,26 +25,16 @@ function GraficoPizza() {
         }],
       },
     };
-    var ctx = document.getElementById("pizza-chart").getContext("2d");
+    var ctx = document.getElementById(props.titulo).getContext("2d");
     window.myLine = new Chart(ctx, config);
   }
 
   React.useEffect(() => {
-    dadosGrafico();
+    gerarGrafico();
   }, []);
 
-  useEffect(() => {
-    gerarGrafico();
-  }, dados)
-
   return (
-    <div className="bg-white flex flex-col w-full min-w-full h-min ">
-      <div className="px-4 pt-3 pb-5 border-b">
-        <h1 className="font-bold text-base uppercase">Quantidade de veículos cadastrados</h1>
-        <h2 className="font-semibold text-sm">Dados organizados pelo tipo</h2>
-      </div>
-      <canvas className="my-3" id="pizza-chart"></canvas>
-    </div>
+    <canvas className="my-3" id={props.titulo}></canvas>
   )
 }
 

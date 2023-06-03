@@ -20,7 +20,7 @@ function Totalizador(props){
     }
 
     return (
-        <div className={'bg-white grow shrink-1 basis-52 p-5 flex items-center rounded-lg shadow-md mb-5'}>
+        <div className={'bg-white grow shrink-1 basis-48 p-5 flex items-center rounded-lg w-full shadow-md'}>
             <div className= {props.backIcon + ' rounded-full p-3 mr-3 min-h-max shadow-md'}>
                 {icones(props.icone)}
             </div>

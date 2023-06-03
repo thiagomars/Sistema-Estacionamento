@@ -1,5 +1,5 @@
 import { VscDebugStepOut, VscDebugStepInto } from 'react-icons/vsc'
-import { IoIosLock } from 'react-icons/io'
+import { IoIosLock, IoIosSettings } from 'react-icons/io'
 import EntradaVeiculos from '../pages/EntradaVeiculos';
 import SaidaVeiculos from '../pages/SaidaVeiculos';
 
@@ -28,30 +28,23 @@ function MenuRapido() {
     }
 
     return (
-        <header className="flex flex-wrap gap-5 h-min w-full">
-            <button onClick={openModal} className="bg-green-500 grow shrink-1 basis-52 p-5 flex flex-col items-center rounded-lg shadow-md hover:bg-green-600">
-                <VscDebugStepOut className='text-white text-9xl' />
-                <p className='text-white font-bold text-lg'>ENTRADA DE VEÍCULO</p>
+        <header className="flex flex-wrap h-min w-full bg-white rounded-lg overflow-hidden">
+            <button onClick={openModal} className="grow shrink-1 basis-44 sm:p-4 p-2 flex flex-row items-center justify-center rounded-lg sm:rounded-none border-2 sm:border-b-2 sm:border-0 sm:hover:bg-white hover:bg-indigo-100 border-white hover:border-indigo-500 hover:text-indigo-600 bg-center bg-cover object-cover">
+                <VscDebugStepOut className='text-lg mr-1 rounded-full'/>
+                <p className='font-medium'>Entrada de Veículo</p>
             </button>
-            <button onClick={openModalSaida} className="bg-red-500 grow shrink-1 basis-52 p-5 flex flex-col items-center rounded-lg shadow-md hover:bg-red-600">
-                <VscDebugStepInto className='text-white text-9xl' />
-                <p className='text-white font-bold text-lg'>SAÍDA DE VEÍCULO</p>
+            <button onClick={openModalSaida} className="grow shrink-1 basis-44 sm:p-4 p-2 flex flex-row items-center justify-center rounded-lg sm:rounded-none border-2 sm:border-b-2 sm:border-0 sm:hover:bg-white hover:bg-indigo-100 border-white hover:border-indigo-500 hover:text-indigo-600 bg-center bg-cover object-cover">
+                <VscDebugStepInto className='text-lg mr-1 rounded-full'/>
+                <p className='font-medium'>Saída de Veículo</p>
             </button>
-            <div className="bg-purple-500 grow shrink-1 basis-52 p-4 flex flex-col items-center rounded-lg shadow-md">
-                <div className='flex flex-col items-center justify-center text-gray-700 text-xl font-semibold w-full h-full'>
-                    <button className='bg-purple-300 p-3 rounded-lg w-full h-full flex flex-row justify-center items-center' href='#'>
-                        <IoIosLock className='mr-1'/>
-                        <p>Novo Item</p>
-                    </button>
-
-                    <div className='my-2 w-full'></div>
-
-                    <button className='bg-purple-300 p-3 rounded-lg w-full h-full flex flex-row justify-center items-center' href='#'>
-                        <IoIosLock className='mr-1'/>
-                        <p>Novo Item</p>
-                    </button>
-                </div>
-            </div>
+            <button onClick={openModalSaida} className="grow shrink-1 basis-44 sm:p-4 p-2 flex flex-row items-center justify-center rounded-lg sm:rounded-none border-2 sm:border-b-2 sm:border-0 sm:hover:bg-white hover:bg-indigo-100 border-white hover:border-indigo-500 hover:text-indigo-600 bg-center bg-cover object-cover">
+                <IoIosSettings className='text-lg mr-1 rounded-full'/>
+                <p className='font-medium'>Configurações</p>
+            </button>
+            <button onClick={openModalSaida} className="grow shrink-1 basis-44 sm:p-4 p-2 flex flex-row items-center justify-center rounded-lg sm:rounded-none border-2 sm:border-b-2 sm:border-0 sm:hover:bg-white hover:bg-indigo-100 border-white hover:border-indigo-500 hover:text-indigo-600 bg-center bg-cover object-cover">
+                <IoIosLock className='text-lg mr-1 rounded-full'/>
+                <p className='font-medium'>Outra Função</p>
+            </button>
 
             <Transition appear show={abaEntrada} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={closeModal}>
